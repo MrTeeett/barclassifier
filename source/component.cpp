@@ -13,8 +13,6 @@ bc::Component::Component(int x, int y, bc::barcodeCreator* factory)
     start = factory->curbright;
     end = 255;
 
-    //    binmap.create(factory->hei, factory->wid, CV_16SC1);
-    //    binmap.setTo(-1);
     add(point(x, y));
 }
 
@@ -27,8 +25,6 @@ bc::Component::Component(bc::barcodeCreator* factory)
     start = factory->curbright;
     end = 255;
 
-    //    binmap.create(factory->hei, factory->wid, CV_16SC1);
-    //    binmap.setTo(-1);
     coords = new pmap();
 }
 
@@ -56,10 +52,6 @@ void bc::Component::kill()
     end = factory->curbright;
 }
 
-//void bc::Component::setB(const point &p)
-//{
-//    binmap.at<short>(p.y, p.x) = (short)(factory->curbright);
-//}
 
 bc::Component::~Component()
 {

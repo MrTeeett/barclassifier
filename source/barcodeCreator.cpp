@@ -475,13 +475,8 @@ inline bool bc::barcodeCreator::checkCloserB1(point& p)
                 if (h2 != nullptr && !h2->isValid)
                 {
                     Hole* nh = new Hole(p, curp, next, this);
-                    //                    if (!nh->getIsOutside()) ++lastB;
                     delete h_t;
                     delete h2;
-
-                    //                    included[GETPOFF(p)] = nh;
-                    //                    included[GETPOFF(curp)] = nh;
-                    //                    included[GETPOFF(next)] = nh;
                 }
                 else if (tryAdd(hr, curp))
                     delete h_t;
@@ -526,26 +521,11 @@ inline bool bc::barcodeCreator::checkCloserB1(point& p)
 inline bool bc::barcodeCreator::tryAdd(bc::Hole* h, const point& p)
 {
     return  h->tryAdd(p);
-    //   bool outDo = h->isOutside;
-
-    //   if (h->tryAdd(p))
-    //   {
-    //       included[GETPOFF(p)] = h;
-    //       if (h->isOutside != outDo)
-    //           --lastB;
-
-    //       return true;
-    //   }
-    //   return false;
 }
+
 inline void bc::barcodeCreator::add(bc::Hole* h, point& p)
 {
     h->add(p);
-    //    bool outDo = h->isOutside;
-    //    included[GETPOFF(p)] = h;
-
-    //    if (h->isOutside != outDo)
-    //        --lastB;
 }
 
 inline bc::point* bc::barcodeCreator::sort(cv::Mat* arr)
@@ -582,8 +562,6 @@ inline bc::point* bc::barcodeCreator::sort(cv::Mat* arr)
             data[offs[p]++] = point((int)i, (int)j);
         }
     }
-    //delete[] hist;
-    //delete[] offs;
 
     return data;
 }
@@ -601,10 +579,10 @@ void bc::barcodeCreator::init(const cv::Mat& src, cv::Mat& img)
         cv::cvtColor(src, img, cv::COLOR_BGR2GRAY);
     else
         img = src;
-    //    components.clear();
-    //barMap.release();
-    if (createMap) barMap = cv::Mat(img.rows, img.cols, CV_16U, cv::Scalar(0));
-    //    cv::imwrite("D:\\2.png", img);
+
+    if (createMap)
+        barMap = cv::Mat(img.rows, img.cols, CV_16U, cv::Scalar(0));
+
     wid = img.cols;
     hei = img.rows;
     totalSize = img.cols * img.rows;
@@ -628,9 +606,6 @@ void bc::barcodeCreator::init(const cv::Mat& src, cv::Mat& img)
                 for (int r = 0; r < 255; r += 20)
                     colors.push_back(cv::Vec3b(b, g, r));
     }
-
-    //bin0t255.clear();
-    //bin255t0.clear();
 }
 
 bc::Barcode* bc::barcodeCreator::createSLbarcode(const cv::Mat& src, uchar foneStart, uchar foneEnd)
@@ -673,31 +648,7 @@ bc::Barcode* bc::barcodeCreator::createSLbarcode(const cv::Mat& src, uchar foneS
     }
     off = len;
     processHole0to255(img, b);
-    //    for (size_t i = 0; i < totalSize; ++i) {
-    //        point pix = sortedArr[i];
-    //        uchar cur;
-    //        if (i < foneStartI)
-    //            cur= img.at<uchar>(pix.cvPoint());
-    //        else
-    //            cur =img.at<uchar>(sortedArr[off--].cvPoint());
-    //        ///////////////////////////////////////////////////
-    //#ifdef VDEBUG
-    //        VISULA_DEBUG(totalSize, i, pix);
-    //#else
-    //        checkCloserB1(pix);
-    //#endif
-    //        ///////////////////////////////////////////////////
-    //        if (i != len) {
-    //            short scnd =i<foneStartI? img.at<uchar>(sortedArr[i + 1].cvPoint()):img.at<uchar>(sortedArr[off].cvPoint());
-    //            if (cur != scnd) //идет от 0 до 255. если перешагиваем больше чем 1, тогда устанавливаем значения все
-    //                for (int k = cur; k < scnd; ++k)
-    //                    b[k] = lastB;
-    //        } else b[cur] = lastB;
-    //    }
 
-    //    assert(((void)"ALARM! b is not zero", lastB == 0));
-
-    //    clearIncluded();
     delete[] sortedArr;
     delete[] included;
 

@@ -12,17 +12,7 @@ namespace bc
 
         Hole(point p1, point p2, point p3, barcodeCreator* factory);
         Hole(point p1, barcodeCreator* factory);
-        //******************STATIC SIDE**********************
 
-
-
-        //***************************************************
-    //        void setOutside(bool b) {
-    //            isOutside = b;
-
-    //        }
-    //        inline bool getOutside() { return isOutside;}
-    //    void addAround();
         bool tryAdd(const point& p);
         //add withot cheks. NOT SAFE. not add if valid
         void add(const point& p);

@@ -29,67 +29,6 @@ int pr = 10; bool normA = false;
 const int N = 10;
 
 std::unordered_map<string, int> categorues;
-//class rfor
-//{
-//public:
-//	rfor()
-//	{
-//
-//#define ATTRIBUTES_PER_SAMPLE (4)
-//		// Assumes training data (1000, 16x16x3) are in training_data
-//		// Assumes training classifications (1000, 1) are in training_classifications
-//
-//		// All inputs are numerical. You can change this to reflect your data
-//		Mat var_type = Mat(ATTRIBUTES_PER_SAMPLE, 1, CV_8U);
-//		var_type.setTo(Scalar(CV_VAR_NUMERICAL)); // all inputs are numerical
-//
-//		// Output is a category; this is classification, not regression
-//		var_type.at<uchar>(ATTRIBUTES_PER_SAMPLE, 0) = CV_VAR_CATEGORICAL;
-//
-//		// Train the classifier
-//		ml::CVRTrees* rtree = new ml::RTrees();
-//		rtree->train(training_data, CV_ROW_SAMPLE, training_classifications,
-//			Mat(), Mat(), var_type);
-//	}
-//	void addClass(bc::Barcontainer* cont, int classInd)
-//	{
-//		classes[classInd].addItem(cont->exractItem(0));
-//		classes[classInd + N].addItem(cont->exractItem(1));
-//		delete cont;
-//	}
-//
-//	//bool check(bc::Barcontainer* cont)
-//	//{
-//
-//	//}
-//
-//
-//	bool check(bc::Baritem* bar0, bc::Baritem* bar255, int type)
-//	{
-//		float res = 0;
-//
-//		//res = classes[type].compireBest(bar0, cp) * 0.5;
-//		//res += classes[type + N].compireBest(bar255, cp) * 0.5;
-//		//if (res > 0.9)
-//		//	return true;
-//
-//		int maxInd = type;
-//		float maxP = res;
-//		for (size_t i = 0; i < N; i++)
-//		{
-//			float ps = classes[i].compireCTS(bar0) * 0.5 + classes[i + N].compireCTS(bar255) * 0.5;
-//			if (ps > maxP)
-//			{
-//				maxP = ps;
-//				maxInd = i;
-//			}
-//		}
-//
-//		return type == maxInd;
-//	}
-//
-//
-//};
 
 class barclassificator
 {
@@ -159,11 +98,6 @@ inline bool exists(const std::string& name) {
 	return (stat(name.c_str(), &buffer) == 0);
 }
 
-void getCategories()
-{
-
-}
-
 void getSet(string path, barclassificator& data, char diff = '0', float* params = nullptr) 
 {
 	barcodeCreator bc;
@@ -214,7 +148,7 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 		std::getline(infile, line);
 		std::getline(infile, line);
 		bool stop = false;
-		while (std::getline(infile, line))//1321.0 44.0 1338.0 37.0 1339.0 70.0 1329.0 58.0 large-vehicle 1 
+		while (std::getline(infile, line))
 		{
 			std::vector<string> lids;
 			split(line, lids);
@@ -229,46 +163,12 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 
 			int index = r->second;
 
-			//int x = atoi(lids[0].c_str());
-			//int y = atoi(lids[1].c_str());
 			int xend = atoi(lids[2].c_str());
 			int yend = atoi(lids[5].c_str());
 			if (yend >= source.rows || xend >= source.cols)
 			{
 				continue;
 			}
-			
-			//int wid = xend - x;
-			//int hei = yend - y;
-
-			////if (wid < 32 || hei < 32)
-			////{
-			////	continue;
-			////}
-			//cv::Rect ds(x, y, wid, hei);
-			//cv::Mat m = source(ds);
-
-			//if (params)
-			//{
-			//	if (params[0] > 0)
-			//		cv::rotate(m, m, cv::ROTATE_90_CLOCKWISE);
-
-			//	if (params[1] > 0)
-			//		cv::resize(m, m, Size(m.cols * (1.0 - params[1]), m.rows));
-
-			//	if (params[2] > 0)
-			//	{
-			//		ds.width *= (1.0 - params[2]);
-			//		m = source(ds);
-			//	}
-			//}
-
-			//cv::resize(m, m, cv::Size(32, 32));
-			//cv::imshow("test", m);
-			//cv::waitKey(1);
-			//bc::BarMat wrapper(m);
-		/*	auto b = bc.createBarcode(m, constr);
-			b->preprocessBar(pr, normA);*/
 			++k;
 		}
 
