@@ -212,8 +212,6 @@ void doMagickDOTA()
 
 	barclassificator validation2;
 	getSet(pathvalidation, validation2, '0');
-	system("pause");
-	return;
 
 	bc::Barcontainer testcont;
 	int correct = 0;
