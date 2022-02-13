@@ -1,15 +1,15 @@
 TEMPLATE = app
-CONFIG += console c++11
+CONFIG += console c++17
 CONFIG -= qt
 
 SOURCES += \
-        main.cpp \
         source/barclasses.cpp \
         source/barcodeCreator.cpp \
         source/component.cpp \
         source/hole.cpp
 
 HEADERS += \
+    detection.h \
     include/barclasses.h \
     include/barcodeCreator.h \
     include/barline.h \
@@ -19,3 +19,9 @@ HEADERS += \
     include/include_cv.h \
     include/include_py.h \
     include/presets.h
+
+INCLUDEPATH += pathToOpenCV/Include
+DEPENDPATH += pathToOpenCV/Include
+
+INCLUDEPATH += ./include
+
