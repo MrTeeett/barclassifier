@@ -178,7 +178,7 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 
 void doMagickDOTA()
 {
-	string s = "../analysis\\datasets\\DOTA\\images";
+	string s = "../analysis/datasets/DOTA/images";
 	barclassificator train;
 
 

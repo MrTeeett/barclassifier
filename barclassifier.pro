@@ -3,6 +3,7 @@ CONFIG += console c++17
 CONFIG -= qt
 
 SOURCES += \
+        main.cpp
         source/barclasses.cpp \
         source/barcodeCreator.cpp \
         source/component.cpp \
