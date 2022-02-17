@@ -122,7 +122,6 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 	constr.push_back(barstruct(ProcType::f255t0, ColorType::gray, ComponentType::Hole));
 	using recursive_directory_iterator = fs::recursive_directory_iterator;
 	int k = 0;
-	cv::namedWindow("test", cv::WINDOW_NORMAL);
 
 	for (const auto& dirEntry : recursive_directory_iterator(coords))
 	{
@@ -163,12 +162,23 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 
 			int index = r->second;
 
+
 			int xend = atoi(lids[2].c_str());
 			int yend = atoi(lids[5].c_str());
 			if (yend >= source.rows || xend >= source.cols)
-			{
 				continue;
-			}
+
+			int x = atoi(lids[0].c_str());
+			int y = atoi(lids[1].c_str());
+			cv::Rect ds(x, y, xend - x, yend - y);
+			cv::Mat m = source(ds);
+			if (m.empty())
+				continue;
+
+			cv::resize(m, m, cv::Size(32, 32));
+			auto b = bc.createBarcode(m, constr);
+			b->preprocessBar(pr, normA);
+			addClass(b, index);
 			++k;
 		}
 
