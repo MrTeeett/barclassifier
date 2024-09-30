@@ -178,7 +178,7 @@ void getSet(string path, barclassificator& data, char diff = '0', float* params 
 			cv::resize(m, m, cv::Size(32, 32));
 			auto b = bc.createBarcode(m, constr);
 			b->preprocessBar(pr, normA);
-			addClass(b, index);
+			data.addClass(b, index);
 			++k;
 		}
 
